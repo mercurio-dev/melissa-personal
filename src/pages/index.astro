@@ -1,11 +1,14 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Brand from '@/components/Brand.astro';
+import Hero from '@/components/Hero.astro';
+import Process from '@/components/Process.astro';
+import Services from '@/components/Services.astro';
+import Assessment from '@/components/Assessment.astro';
+import Formats from '@/components/Formats.astro';
+import About from '@/components/About.astro';
+import Contact from '@/components/Contact.astro';
+import { site } from '@/data/site';
 ---
-<Layout title="Melissa Amaral | Em breve">
-  <Brand />
-  <h1>Um novo espaço para o seu movimento.</h1>
-  <p>Avaliação física, prescrição individualizada e acompanhamento.</p>
-  <p>Site em preparação.</p>
-  <small>Profissional de Educação Física · CREF 130791-G/SP</small>
+<Layout title={site.title}>
+  <Hero /><Process /><Services /><Assessment /><Formats /><About /><Contact />
 </Layout>

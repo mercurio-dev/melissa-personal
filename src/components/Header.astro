@@ -1,0 +1,27 @@
+---
+import Icon from "./Icon.astro";
+---
+<header class="site-header">
+  <a href="/" class="brand">MELISSA AMARAL<small>Educação física · Saúde & movimento</small></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation" hidden>Menu</button>
+  <nav id="navigation" aria-label="Navegação principal">
+    <a href="/#method">O processo</a><a href="/#work">Atuação</a><a href="/#about">Melissa</a><a href="/#contact" class="nav-cta">Vamos conversar <Icon name="arrow-up-right" /></a>
+  </nav>
+</header>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const navigation = document.getElementById('navigation');
+  if (button && navigation) {
+    button.hidden = false;
+    navigation.classList.add('collapsible');
+    const close = () => { button.setAttribute('aria-expanded', 'false'); navigation.classList.remove('open'); };
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open)); navigation.classList.toggle('open', open);
+    });
+    navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') { close(); button.focus(); }
+    });
+  }
+</script>

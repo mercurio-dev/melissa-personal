@@ -1,0 +1,9 @@
+---
+import { Image } from "astro:assets";
+import hero from "@/images/strength.webp";
+import Icon from "./Icon.astro";
+import { whatsappUrl } from "@/data/site";
+---
+
+<section class="hero" aria-labelledby="hero-title"><Image class="hero-image" src={hero} alt="" widths={[640, 960, 1200]} sizes="100vw" loading="eager" fetchpriority="high" quality={75} /><div class="hero-content"><div class="eyebrow">Avaliação · Prescrição · Acompanhamento</div><h1 id="hero-title">O CORPO GRITA<br>POR <em>MOVIMENTO.</em></h1><p class="lead">Exercício não é apenas sobre estética.<br>É sobre recuperar capacidade, autonomia e qualidade de vida.</p><a class="action" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Agendar uma avaliação <Icon name="arrow-up-right" /></a><p class="tiny">Atendimento presencial e online · CREF 130791-G/SP</p></div></section>
+<div class="statement"><span><Icon name="heart-pulse" />Saúde e autonomia</span><span><Icon name="dumbbell" />Força para o dia a dia</span><span><Icon name="activity" />Performance com estratégia</span></div>
