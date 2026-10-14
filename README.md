@@ -24,9 +24,8 @@ Branch de produção: `main`. Build: `npm run check && npm run build`. Diretóri
 
 ### Configuração de lançamento
 
-Nenhuma variável é necessária para renderizar o site. Duas variáveis opcionais são reconhecidas em build:
+Nenhuma variável é necessária para renderizar o site. O WhatsApp confirmado (+55 12 99125-5292) está definido em `src/data/site.ts`, sem necessidade de variável de ambiente. Uma variável opcional é reconhecida em build:
 
-- `PUBLIC_WHATSAPP_NUMBER`: número real, com código do país, somente dígitos. Quando ausente, o contato mostra "Agendamento em breve", sem link fictício. Valores malformados interrompem o build.
 - `PUBLIC_ENABLE_INDEXING=true`: libera indexação apenas quando `CONTEXT=production` (definido pelo Netlify). Previews, builds locais e 404 permanecem `noindex`. Enquanto não habilitada, robots.txt também bloqueia rastreamento.
 
 Depois de alterar as variáveis, faça novo deploy. Ao usar domínio próprio, atualize `site` em `astro.config.mjs` e `site.url` em `src/data/site.ts` juntos. Canonical e Open Graph apontam para a URL de produção; sitemap é gerado automaticamente. Dados estruturados usam Person, sem inventar endereço, avaliações ou credenciais.
@@ -37,4 +36,4 @@ Retrato: fotografia fornecida pelo responsável pelo projeto, otimizada para Web
 
 ## Revisão antes do merge
 
-Validar o Deploy Preview em desktop e celular, conferir o retrato e os textos e informar o número real do WhatsApp. A implementação não foi mesclada automaticamente.
+Validar o Deploy Preview em desktop e celular, conferir o retrato, os textos e o link do WhatsApp. A implementação não foi mesclada automaticamente.
