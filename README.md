@@ -1,41 +1,40 @@
 # Melissa Amaral
 
-Base Astro estática para o site profissional de Melissa Amaral.
-Esta etapa contém somente a estrutura e uma página provisória. A landing page aprovada será implementada em PR separado.
+Landing page estática em Astro, implementando o protótipo aprovado: azul profundo, coral, areia e verde-água; hero com imagem e gradiente; avaliação, prescrição e acompanhamento; retrato real de Melissa.
 
 ## Desenvolvimento
 
-Node 22.12+ (linha 22) e npm.
+Node 22.12+ e npm. Execute `npm ci`, `npm run dev`, `npm run check` e `npm run build`. Use `npm run preview` para inspecionar o resultado estático.
 
-```sh
-npm ci
-npm run dev
-npm run check
-npm run build
-npm run preview
-```
+## Organização
 
-## Estrutura
+- `src/pages`: rotas e robots.txt gerado no build.
+- `src/layouts`: HTML, metadados e estrutura da página.
+- `src/components`: seções da landing page e ícones.
+- `src/data/site.ts`: identificação, URL canônica e contato.
+- `src/styles/global.css`: tokens, layout responsivo e estados de interação.
+- `src/images`: fotografias processadas pelo Astro em WebP responsivo.
+- `src/icons`: somente os SVGs utilizados, da biblioteca Lucide, com licença ISC preservada.
 
-- `src/pages`: rotas Astro.
-- `src/layouts`: documento HTML e metadados compartilhados.
-- `src/components`: componentes Astro com CSS local.
-- `src/styles`: estilos globais e tokens.
-- `public`: arquivos estáticos.
+HTML estático, sem framework cliente. Apenas o menu mobile usa JavaScript. A navegação continua disponível sem JavaScript. Imagem da hero carregada prioritariamente; retrato usa lazy loading e dimensões explícitas.
 
-Segue a separação usada em `will-amaral/personal-website`, sem adicionar router cliente ou framework JavaScript para uma landing page estática.
+## Netlify e previews
 
-## Netlify
+Branch de produção: `main`. Build: `npm run check && npm run build`. Diretório: `dist`. Node 22 definido em `netlify.toml`. A integração Git do Netlify gera Deploy Previews para PRs; GitHub Actions valida o código sem tokens Netlify.
 
-Importar o repositório e selecionar `main` como branch de produção.
-O `netlify.toml` define o comando `npm run check && npm run build`, a pasta `dist` e Node 22. Não é necessário adapter para esta saída estática.
-Manter Deploy Previews habilitados para pull requests no painel Netlify. A integração gera uma URL por PR depois que o repositório estiver conectado.
-Não são necessários tokens Netlify no GitHub Actions: a integração Git do Netlify cuida dos deploys, e o workflow apenas valida o projeto.
+### Configuração de lançamento
 
-Documentação: https://docs.astro.build/en/guides/deploy/netlify/ e https://docs.netlify.com/deploy/deploy-types/deploy-previews/.
+Nenhuma variável é necessária para renderizar o site. Duas variáveis opcionais são reconhecidas em build:
 
-## Próxima etapa
+- `PUBLIC_WHATSAPP_NUMBER`: número real, com código do país, somente dígitos. Quando ausente, o contato mostra "Agendamento em breve", sem link fictício. Valores malformados interrompem o build.
+- `PUBLIC_ENABLE_INDEXING=true`: libera indexação apenas quando `CONTEXT=production` (definido pelo Netlify). Previews, builds locais e 404 permanecem `noindex`. Enquanto não habilitada, robots.txt também bloqueia rastreamento.
 
-Implementar o protótipo aprovado: versão anterior à exploração clara, com azul profundo, coral, areia e verde-água; hero em coluna única com imagem suave e overlay; iconografia nas seções. Validar a implementação pela URL do PR antes de merge.
+Depois de alterar as variáveis, faça novo deploy. Ao usar domínio próprio, atualize `site` em `astro.config.mjs` e `site.url` em `src/data/site.ts` juntos. Canonical e Open Graph apontam para a URL de produção; sitemap é gerado automaticamente. Dados estruturados usam Person, sem inventar endereço, avaliações ou credenciais.
 
-Antes do lançamento: inserir fotos e WhatsApp definitivos, confirmar dados de atendimento e domínio, configurar canonical/sitemap e liberar indexação somente em produção. Por enquanto, todas as páginas têm `noindex` e `robots.txt` bloqueia indexação intencionalmente.
+## Imagens
+
+Retrato: fotografia fornecida pelo responsável pelo projeto, otimizada para WebP. Imagem social derivada do mesmo retrato. Hero: foto provisória utilizada no protótipo, via https://images.unsplash.com/photo-1517836357463-d25dfeac3438. Confirmar a imagem definitiva antes do lançamento.
+
+## Revisão antes do merge
+
+Validar o Deploy Preview em desktop e celular, conferir o retrato e os textos e informar o número real do WhatsApp. A implementação não foi mesclada automaticamente.
